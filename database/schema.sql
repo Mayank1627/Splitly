@@ -16,6 +16,8 @@ DROP TABLE IF EXISTS expenses;
 DROP TABLE IF EXISTS group_memberships;
 DROP TABLE IF EXISTS `groups`;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS import_rows;
+DROP TABLE IF EXISTS import_batches;
 
 -- 1. Users Table
 CREATE TABLE users (
