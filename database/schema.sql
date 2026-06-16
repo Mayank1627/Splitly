@@ -4,6 +4,9 @@
 CREATE DATABASE IF NOT EXISTS splitly;
 USE splitly;
 
+-- Disable foreign key checks to allow drops of existing tables
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- Drop existing tables in reverse order of foreign keys to allow clean re-runs
 DROP TABLE IF EXISTS ingestion_anomalies;
 DROP TABLE IF EXISTS import_reports;
@@ -134,3 +137,6 @@ INSERT INTO group_memberships (group_id, user_id, joined_at, left_at) VALUES
 (1, 5, '2026-04-15', NULL),          -- Sam (joins April 15)
 (1, 6, '2026-01-01', NULL),          -- Dev (trip participant / guest)
 (1, 7, '2026-01-01', NULL);          -- Kabir
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS = 1;
