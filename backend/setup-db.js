@@ -19,22 +19,8 @@ async function run() {
     console.log(`Reading schema script from: ${schemaPath}`);
     const sqlContent = fs.readFileSync(schemaPath, 'utf8');
 
-    // Split SQL into individual statements, filtering out empty lines or comments
-    const statements = sqlContent
-      .split(/;\r?\n/)
-      .map(stmt => stmt.trim())
-      .filter(stmt => stmt.length > 0 && !stmt.startsWith('--'));
-
-    console.log(`Executing ${statements.length} SQL statements...`);
-    for (let i = 0; i < statements.length; i++) {
-      const stmt = statements[i];
-      if (stmt.toUpperCase().startsWith('USE ')) {
-        // Run USE query directly
-        await connection.query(stmt);
-      } else {
-        await connection.query(stmt);
-      }
-    }
+    console.log(`Executing SQL script as a single batch...`);
+    await connection.query(sqlContent);
 
     console.log('Database schema and seed data loaded successfully!');
   } catch (err) {
